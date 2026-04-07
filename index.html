@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Mapeamento Urbano Colaborativo</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <style>
+    body { font-family: Arial; }
+    .hidden { display: none; }
+
+    .navbar { background-color: #4d83bf; }
+    .navbar-brand { color: white; font-weight: bold; }
+
+    .card { border-radius: 15px; }
+
+    #map { height: 400px; border-radius: 10px; }
+
+    .btn-custom {
+      font-size: 16px;
+      padding: 8px 20px;
+      width: auto;
+    }
+  </style>
+</head>
+
+<body class="bg-light">
+
+<nav class="navbar p-3">
+  <span class="navbar-brand">🌍 Mapeamento Urbano Colaborativo</span>
+</nav>
+
+<div class="container mt-4">
+
+  <!-- HOME -->
+  <div id="home" class="text-center">
+    <div class="card p-4 shadow">
+      <h2>Bem-vindo!</h2>
+      <p>Registre problemas urbanos e ajude sua cidade.</p>
+
+      <div class="d-flex justify-content-center gap-3 flex-wrap">
+        <button class="btn btn-primary btn-custom" onclick="mostrarCadastro()">Registrar Problema</button>
+        <button class="btn btn-success btn-custom" onclick="mostrarLista()">Ver Ocorrências</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CADASTRO -->
+  <div id="cadastro" class="hidden">
+    <div class="card p-4 shadow">
+      <h3>Registrar Problema</h3>
+
+      <form id="formProblema">
+        <input type="text" id="tipo" class="form-control mb-2" placeholder="Título" required>
+        <textarea id="descricao" class="form-control mb-2" placeholder="Descrição" required></textarea>
+        <input type="text" id="localizacao" class="form-control mb-2" placeholder="Localização (ex: rua, bairro)" required>
+
+        <button class="btn btn-primary btn-custom">Salvar</button>
+      </form>
+
+      <div class="text-center">
+        <button class="btn btn-secondary btn-custom mt-3" onclick="voltarHome()">Voltar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LISTA -->
+  <div id="listaTela" class="hidden">
+    <div class="card p-4 shadow">
+
+      <h3>Dashboard</h3>
+      <p id="pendentes"></p>
+      <p id="resolvidos"></p>
+
+      <h3>Ocorrências</h3>
+      <ul id="lista" class="list-group mb-4"></ul>
+
+      <h4>Mapa de Ocorrências</h4>
+      <div id="map"></div>
+
+      <div class="text-center">
+        <button class="btn btn-secondary btn-custom mt-3" onclick="voltarHome()">Voltar</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function esconderTudo() {
+  document.getElementById("home").classList.add("hidden");
+  document.getElementById("cadastro").classList.add("hidden");
+  document.getElementById("listaTela").classList.add("hidden");
+}
+
+function mostrarCadastro() {
+  esconderTudo();
+  document.getElementById("cadastro").classList.remove("hidden");
+}
+
+function mostrarLista() {
+  esconderTudo();
+  document.getElementById("listaTela").classList.remove("hidden");
+
+  carregarLista();
+  atualizarDashboard();
+  iniciarMapa();
+}
+
+function voltarHome() {
+  esconderTudo();
+  document.getElementById("home").classList.remove("hidden");
+}
+
+function salvarProblema(tipo, descricao, localizacao) {
+  navigator.geolocation.getCurrentPosition((pos) => {
+
+    let dados = JSON.parse(localStorage.getItem("problemas")) || [];
+
+    dados.push({
+      tipo,
+      descricao,
+      localizacao,
+      lat: pos.coords.latitude,
+      lng: pos.coords.longitude,
+      status: "Pendente"
+    });
+
+    localStorage.setItem("problemas", JSON.stringify(dados));
+
+    alert("Problema registrado com localização real!");
+  });
+}
+
+document.getElementById("formProblema").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  let tipo = document.getElementById("tipo").value;
+  let descricao = document.getElementById("descricao").value;
+  let localizacao = document.getElementById("localizacao").value;
+
+  salvarProblema(tipo, descricao, localizacao);
+
+  this.reset();
+});
+
+function carregarLista() {
+  let lista = document.getElementById("lista");
+  lista.innerHTML = "";
+
+  let dados = JSON.parse(localStorage.getItem("problemas")) || [];
+
+  dados.forEach((p, i) => {
+    lista.innerHTML += `
+      <li class="list-group-item">
+        <strong>${p.tipo}</strong><br>
+        ${p.descricao}<br>
+        📍 ${p.localizacao}<br>
+
+        <span class="badge ${p.status === 'Pendente' ? 'bg-warning' : 'bg-success'}">
+          ${p.status}
+        </span>
+
+        <div class="mt-2">
+          <button onclick="resolver(${i})" class="btn btn-success btn-sm">✔ Resolver</button>
+          <button onclick="editar(${i})" class="btn btn-primary btn-sm">✏ Editar</button>
+          <button onclick="excluir(${i})" class="btn btn-danger btn-sm">🗑 Excluir</button>
+        </div>
+      </li>
+    `;
+  });
+}
+
+function resolver(index) {
+  let dados = JSON.parse(localStorage.getItem("problemas"));
+  dados[index].status = "Resolvido";
+  localStorage.setItem("problemas", JSON.stringify(dados));
+  carregarLista();
+  atualizarDashboard();
+}
+
+function excluir(index) {
+  let dados = JSON.parse(localStorage.getItem("problemas"));
+  dados.splice(index, 1);
+  localStorage.setItem("problemas", JSON.stringify(dados));
+  carregarLista();
+  atualizarDashboard();
+}
+
+function editar(index) {
+  let dados = JSON.parse(localStorage.getItem("problemas"));
+
+  document.getElementById("tipo").value = dados[index].tipo;
+  document.getElementById("descricao").value = dados[index].descricao;
+  document.getElementById("localizacao").value = dados[index].localizacao;
+
+  excluir(index);
+  mostrarCadastro();
+}
+
+function atualizarDashboard() {
+  let dados = JSON.parse(localStorage.getItem("problemas")) || [];
+
+  let pendentes = dados.filter(p => p.status === "Pendente").length;
+  let resolvidos = dados.filter(p => p.status === "Resolvido").length;
+
+  document.getElementById("pendentes").innerText = "Pendentes: " + pendentes;
+  document.getElementById("resolvidos").innerText = "Resolvidos: " + resolvidos;
+}
+
+let map;
+
+function iniciarMapa() {
+  setTimeout(() => {
+
+    if (map) {
+      map.remove();
+    }
+
+    map = L.map('map').setView([-20.4697, -54.6201], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    let dados = JSON.parse(localStorage.getItem("problemas")) || [];
+
+    dados.forEach(p => {
+      if (p.lat && p.lng) {
+        L.marker([p.lat, p.lng])
+          .addTo(map)
+          .bindPopup(`<b>${p.tipo}</b><br>${p.descricao}<br>${p.localizacao}`);
+      }
+    });
+
+  }, 300);
+}
+</script>
+
+</body>
+</html>
