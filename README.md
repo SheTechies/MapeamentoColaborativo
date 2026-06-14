@@ -1,30 +1,61 @@
-# Mapeamento Colaborativo de Problemas Urbanos: Cidadania e Fiscalização Digital
+# Mapeamento Urbano Colaborativo - Plataforma de Zeladoria e Cidadania Digital
+
+##  Projeto de Extensão Acadêmica
+* **Instituição:** Universidade Federal de Mato Grosso do Sul (UFMS)  
+* **Unidade:** Agência de Educação Digital e a Distância (AGEAD / UFMS Digital)  
+* **Curso:** Graduação em Tecnologia da Informação  
+* **Disciplina:** Projeto Integrador de Tecnologia da Informação II  
+* **Banca Examinadora:** Avaliação do Módulo 2 – Desenvolvimento Web com Frameworks e HTML/CSS  
+* **Integrantes do Grupo:** Laurinda da Silva Leite Correa e Monica Gomes de Souza Silva  
+
+---
 
 ## Descrição do Projeto
+O **Mapeamento Urbano Colaborativo** é uma solução de tecnologia cívica e geoprocessamento participativo desenvolvida para democratizar o acesso à zeladoria urbana e combater a precariedade dos canais de comunicação tradicionais das prefeituras. 
 
-Este projeto visa o desenvolvimento de uma **plataforma web colaborativa** para o **mapeamento georreferenciado de problemas urbanos**, como acúmulo de lixo, falhas na iluminação pública e buracos nas vias. O objetivo é fornecer uma solução que promova a **cidadania digital**, **transparência pública** e **participação cidadã** no processo de fiscalização e melhoria da infraestrutura urbana.
+O sistema foi delimitado para atender às demandas de infraestrutura relatadas pelos moradores de três bairros específicos:
+* **Parque das Árvores** (São Paulo - SP)
+* **Universitário** (Campo Grande - MS)
+* **Núcleo Habitacional Buriti** (Campo Grande - MS)
 
-A plataforma permite que os **moradores registrem ocorrências** relacionadas à manutenção urbana, como lixo, buracos e falta de iluminação, com **foto, descrição e localização**, para que as autoridades possam acompanhar, validar e resolver as demandas em tempo real.
+Diferente de sistemas fechados, esta aplicação web dinâmica permite uma leitura coletiva e territorializada do espaço geográfico. Os moradores conseguem visualizar focos acumulados de problemas em tempo real (como falhas de iluminação, acúmulo de resíduos e buracos nas vias), fomentando a fiscalização cidadã, o controle social e apoiando a gestão municipal em aderência estrita ao **Objetivo de Desenvolvimento Sustentável (ODS) 11 da Agenda 2030**.
 
-## Tecnologias Utilizadas
+---
 
-- **Frontend**: React, Tailwind CSS
-- **Backend**: Node.js (ou Django/Flask), PostgreSQL/PostGIS (para geolocalização)
-- **Mapeamento**: Leaflet.js, OpenStreetMap
-- **Versionamento**: Git, GitHub
-- **Testes**: Jest (ou outro framework de testes)
+## Tecnologias e Frameworks Utilizados
+Alinhado com os pré-requisitos técnicos e modelos de qualidade estabelecidos pela norma **ISO/IEC 25010:2023**, o front-end dinâmico utiliza:
+* **HTML5 Semântico:** Para garantir acessibilidade estrutural e leitura precisa por tecnologias assistivas.
+* **CSS3 & Bootstrap 5 (v5.3.0):** Framework utilitário de estilos empregado para garantir a responsividade (reorganização elástica em telas móveis e desktop) e padronização do *Box Model*.
+* **JavaScript Nativo (ES6):** Controle de estados do DOM, eventos de curtidas/comentários e manipulação transacional.
+* **Leaflet.js API (v1.9.4):** Biblioteca cartográfica leve usada para renderizar mapas, popups informativos e marcadores temáticos.
+* **OpenStreetMap API:** Provedor e servidor público de mapas (*Tiles*).
+* **Google Material Icons:** Biblioteca de ícones vetoriais de alto contraste para acessibilidade visual.
 
-## Funcionalidades
+---
 
-- **Cadastro de usuários**: permitindo login e registros anônimos.
-- **Registro de ocorrências urbanas**: com foto e localização georreferenciada.
-- **Painel administrativo**: para que as autoridades públicas possam gerenciar as ocorrências.
-- **Visualização de ocorrências no mapa**: utilizando a integração com o OpenStreetMap e Leaflet.js.
-- **Acompanhamento de status**: permitindo que o usuário veja o andamento da solicitação.
-- **Interface responsiva**: acessível em dispositivos móveis e desktop.
+## Funcionalidades e Requisitos de Acessibilidade (WCAG 2.2)
+Para atender a usuários com diferentes níveis de letramento digital ou deficiências visuais, a aplicação incorpora um **Menu de Acessibilidade Flutuante** nativo, em conformidade com as diretrizes internacionais do **Web Content Accessibility Guidelines (WCAG 2.2)** do W3C:
+* **Aumento/Diminuição de Texto:** Redimensionamento dinâmico e flexível da escala tipográfica global sem quebras na diagramação gráfica.
+* **Modo de Alto Contraste:** Inversão de cores da interface para paleta escura, garantindo as taxas de contraste cromático exigidas pela norma.
+* **Protocolo Anônimo Rastreável:** Opção de login sem e-mail, gerando um token identificador baseado em *timestamp* que assegura a integridade do fluxo e protege o cidadão em denúncias sensíveis (Conformidade com a LGPD).
 
-## Como rodar o projeto localmente
+---
 
-1. Clone este repositório:
+## Modelagem de Persistência e Visão Futura (UML)
+Nesta fase do protótipo, a persistência de dados das ocorrências, curtidas, fotos e comentários é executada no lado do cliente (*client-side*) via strings JSON gravadas no `localStorage` do navegador. 
+Esta decisão técnica simula as regras de integridade e os atributos de chaves primárias e relacionamentos projetados no **Diagrama de Classes UML** e as chamadas assíncronas do **Diagrama de Sequência UML** do grupo. Futuramente, pretende-se substituir a camada de dados local por chamadas REST da API (`fetch`) conectadas de forma robusta ao banco de dados relacional **PostgreSQL**.
+
+---
+
+## Instruções de Instalação e Uso
+
+### Pré-requisitos
+Para executar e testar o protótipo funcional, você necessita apenas de:
+1. Um computador ou smartphone com acesso à internet.
+2. Um navegador web moderno atualizado (Google Chrome, Mozilla Firefox, Microsoft Edge ou Safari).
+3. Permissão de GPS ativa no navegador para capturar as coordenadas reais do hardware durante as postagens (caso negado, o sistema aplica automaticamente coordenadas da região central de Campo Grande-MS).
+
+### Como Rodar Localmente
+1. **Clonar o Repositório:**
    ```bash
-   git clone https://github.com/SheTechies/MapeamentoColaborativo.git
+   git clone [https://github.com/seu-usuario/mapeamento-urbano-colaborativo.git](https://github.com/seu-usuario/mapeamento-urbano-colaborativo.git)
