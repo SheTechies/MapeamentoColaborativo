@@ -5,8 +5,7 @@
 * **Unidade:** Agência de Educação Digital e a Distância (AGEAD / UFMS Digital)  
 * **Curso:** Graduação em Tecnologia da Informação  
 * **Disciplina:** Projeto Integrador de Tecnologia da Informação II  
-* **Banca Examinadora:** Avaliação do Módulo 2 – Desenvolvimento Web com Frameworks e HTML/CSS  
-* **Integrantes do Grupo:** Laurinda da Silva Leite Correa e Monica Gomes de Souza Silva  
+* **Integrantes do grupo:** Laurinda da Silva Leite Correa e Monica Gomes de Souza Silva  
 
 ---
 
