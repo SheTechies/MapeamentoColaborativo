@@ -1,6 +1,6 @@
 # Mapeamento Urbano Colaborativo - Plataforma de Zeladoria e Cidadania Digital
 
-##  Projeto de Extensão Acadêmica
+##  Projeto de extensão acadêmica
 * **Instituição:** Universidade Federal de Mato Grosso do Sul (UFMS)  
 * **Unidade:** Agência de Educação Digital e a Distância (AGEAD / UFMS Digital)  
 * **Curso:** Graduação em Tecnologia da Informação  
