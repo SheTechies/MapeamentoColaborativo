@@ -10,7 +10,7 @@
 
 ---
 
-## Descrição do Projeto
+## Descrição do projeto
 O **Mapeamento Urbano Colaborativo** é uma solução de tecnologia cívica e geoprocessamento participativo desenvolvida para democratizar o acesso à zeladoria urbana e combater a precariedade dos canais de comunicação tradicionais das prefeituras. 
 
 O sistema foi delimitado para atender às demandas de infraestrutura relatadas pelos moradores de três bairros específicos:
@@ -22,7 +22,7 @@ Diferente de sistemas fechados, esta aplicação web dinâmica permite uma leitu
 
 ---
 
-## Tecnologias e Frameworks Utilizados
+## Tecnologias e Frameworks utilizados
 Alinhado com os pré-requisitos técnicos e modelos de qualidade estabelecidos pela norma **ISO/IEC 25010:2023**, o front-end dinâmico utiliza:
 * **HTML5 Semântico:** Para garantir acessibilidade estrutural e leitura precisa por tecnologias assistivas.
 * **CSS3 & Bootstrap 5 (v5.3.0):** Framework utilitário de estilos empregado para garantir a responsividade (reorganização elástica em telas móveis e desktop) e padronização do *Box Model*.
@@ -33,21 +33,21 @@ Alinhado com os pré-requisitos técnicos e modelos de qualidade estabelecidos p
 
 ---
 
-## Funcionalidades e Requisitos de Acessibilidade (WCAG 2.2)
-Para atender a usuários com diferentes níveis de letramento digital ou deficiências visuais, a aplicação incorpora um **Menu de Acessibilidade Flutuante** nativo, em conformidade com as diretrizes internacionais do **Web Content Accessibility Guidelines (WCAG 2.2)** do W3C:
-* **Aumento/Diminuição de Texto:** Redimensionamento dinâmico e flexível da escala tipográfica global sem quebras na diagramação gráfica.
-* **Modo de Alto Contraste:** Inversão de cores da interface para paleta escura, garantindo as taxas de contraste cromático exigidas pela norma.
-* **Protocolo Anônimo Rastreável:** Opção de login sem e-mail, gerando um token identificador baseado em *timestamp* que assegura a integridade do fluxo e protege o cidadão em denúncias sensíveis (Conformidade com a LGPD).
+## Funcionalidades e Requisitos de acessibilidade (WCAG 2.2)
+Para atender a usuários com diferentes níveis de letramento digital ou deficiências visuais, a aplicação incorpora um **Menu de acessibilidade flutuante** nativo, em conformidade com as diretrizes internacionais do **Web Content Accessibility Guidelines (WCAG 2.2)** do W3C:
+* **Aumento/Diminuição de texto:** Redimensionamento dinâmico e flexível da escala tipográfica global sem quebras na diagramação gráfica.
+* **Modo de alto contraste:** Inversão de cores da interface para paleta escura, garantindo as taxas de contraste cromático exigidas pela norma.
+* **Protocolo anônimo rastreável:** Opção de login sem e-mail, gerando um token identificador baseado em *timestamp* que assegura a integridade do fluxo e protege o cidadão em denúncias sensíveis (Conformidade com a LGPD).
 
 ---
 
-## Modelagem de Persistência e Visão Futura (UML)
+## Modelagem de persistência e Visão futura (UML)
 Nesta fase do protótipo, a persistência de dados das ocorrências, curtidas, fotos e comentários é executada no lado do cliente (*client-side*) via strings JSON gravadas no `localStorage` do navegador. 
 Esta decisão técnica simula as regras de integridade e os atributos de chaves primárias e relacionamentos projetados no **Diagrama de Classes UML** e as chamadas assíncronas do **Diagrama de Sequência UML** do grupo. Futuramente, pretende-se substituir a camada de dados local por chamadas REST da API (`fetch`) conectadas de forma robusta ao banco de dados relacional **PostgreSQL**.
 
 ---
 
-## Instruções de Instalação e Uso
+## Instruções de instalação e Uso
 
 ### Pré-requisitos
 Para executar e testar o protótipo funcional, você necessita apenas de:
@@ -55,7 +55,7 @@ Para executar e testar o protótipo funcional, você necessita apenas de:
 2. Um navegador web moderno atualizado (Google Chrome, Mozilla Firefox, Microsoft Edge ou Safari).
 3. Permissão de GPS ativa no navegador para capturar as coordenadas reais do hardware durante as postagens (caso negado, o sistema aplica automaticamente coordenadas da região central de Campo Grande-MS).
 
-### Como Rodar Localmente
-1. **Clonar o Repositório:**
+### Como rodar localmente
+1. **Clonar o repositório:**
    ```bash
    git clone [https://github.com/seu-usuario/mapeamento-urbano-colaborativo.git](https://github.com/seu-usuario/mapeamento-urbano-colaborativo.git)
