@@ -1,7 +1,7 @@
 -- =================================================================
 -- SCRIPT DE MODELAGEM FÍSICA RELACIONAL (POSTGRESQL)
--- PROJETO INTEGRADOR I
--- AUTORAS: AMANDA MAYZE QUEIROZ, LAURINDA CORREA, MONICA GOMES
+-- PROJETO INTEGRADOR II
+-- AUTORAS: LAURINDA CORREA E MONICA GOMES
 -- =================================================================
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
