@@ -1,6 +1,6 @@
 # Mapeamento Urbano Colaborativo - Plataforma de Zeladoria e Cidadania Digital
 
-##  Projeto de extensão acadêmica
+## Projeto de extensão acadêmica
 * **Instituição:** Universidade Federal de Mato Grosso do Sul (UFMS)  
 * **Unidade:** Agência de Educação Digital e a Distância (AGEAD / UFMS Digital)  
 * **Curso:** Graduação em Tecnologia da Informação  
@@ -22,13 +22,13 @@ Diferente de sistemas fechados, esta aplicação web dinâmica permite uma leitu
 ---
 
 ## Tecnologias e Frameworks utilizados
-Alinhado com os pré-requisitos técnicos e modelos de qualidade estabelecidos pela norma **ISO/IEC 25010:2023**, o front-end dinâmico utiliza:
+Alinhado com os pré-requisitos técnicos e modelos de qualidade estabelecidos pela norma **ISO/IEC 25010:2023**, o ecossistema utiliza:
 * **HTML5 Semântico:** Para garantir acessibilidade estrutural e leitura precisa por tecnologias assistivas.
 * **CSS3 & Bootstrap 5 (v5.3.0):** Framework utilitário de estilos empregado para garantir a responsividade (reorganização elástica em telas móveis e desktop) e padronização do *Box Model*.
-* **JavaScript Nativo (ES6):** Controle de estados do DOM, eventos de curtidas/comentários e manipulação transacional.
-* **Leaflet.js API (v1.9.4):** Biblioteca cartográfica leve usada para renderizar mapas, popups informativos e marcadores temáticos.
-* **OpenStreetMap API:** Provedor e servidor público de mapas (*Tiles*).
+* **JavaScript Nativo (ES6):** Controle de estados do DOM, eventos de interações e manipulação transacional na interface.
+* **Leaflet.js API (v1.9.4) & OpenStreetMap:** Biblioteca cartográfica leve e servidor público de mapas (*Tiles*) para renderização dinâmica de marcadores temáticos e popups.
 * **Google Material Icons:** Biblioteca de ícones vetoriais de alto contraste para acessibilidade visual.
+* **SGBD PostgreSQL:** Infraestrutura de persistência relacional normalizada em Terceira Forma Normal (3FN) utilizando identificadores universais únicos (`UUID`) e cláusulas de barreira referencial (`ON DELETE RESTRICT`).
 
 ---
 
@@ -36,23 +36,27 @@ Alinhado com os pré-requisitos técnicos e modelos de qualidade estabelecidos p
 Para atender a usuários com diferentes níveis de letramento digital ou deficiências visuais, a aplicação incorpora um **Menu de acessibilidade flutuante** nativo, em conformidade com as diretrizes internacionais do **Web Content Accessibility Guidelines (WCAG 2.2)** do W3C:
 * **Aumento/Diminuição de texto:** Redimensionamento dinâmico e flexível da escala tipográfica global sem quebras na diagramação gráfica.
 * **Modo de alto contraste:** Inversão de cores da interface para paleta escura, garantindo as taxas de contraste cromático exigidas pela norma.
-* **Protocolo anônimo rastreável:** Opção de login sem e-mail, gerando um token identificador baseado em *timestamp* que assegura a integridade do fluxo e protege o cidadão em denúncias sensíveis (Conformidade com a LGPD).
+* **Protocolo anônimo rastreável:** Opção de registro de ocorrências preservando a identidade do cidadão através de chaves seguras, assegurando a integridade do fluxo e a aderência estrita às premissas de privacidade da Lei Geral de Proteção de Dados (LGPD).
 
 ---
 
-## Modelagem de persistência e Visão futura (UML)
-Nesta fase do protótipo, a persistência de dados das ocorrências, curtidas, fotos e comentários é executada no lado do cliente (*client-side*) via strings JSON gravadas no `localStorage` do navegador. 
-Esta decisão técnica simula as regras de integridade e os atributos de chaves primárias e relacionamentos projetados no **Diagrama de Classes UML** e as chamadas assíncronas do **Diagrama de Sequência UML** do grupo. Futuramente, pretende-se substituir a camada de dados local por chamadas REST da API (`fetch`) conectadas de forma robusta ao banco de dados relacional **PostgreSQL**.
+##  Estrutura de Diretórios do Repositório
+
+* [**MapeamentoColaborativo**](https://github.com/SheTechies/MapeamentoColaborativo)
+  *  [**sql/**](https://github.com/SheTechies/MapeamentoColaborativo/tree/main/sql)
+    *  [schema.sql](https://github.com/SheTechies/MapeamentoColaborativo/blob/main/sql/schema.sql) — Script oficial DDL (Estrutura, tabelas e chaves UUID no PostgreSQL)
+  *  [index.html](https://github.com/SheTechies/MapeamentoColaborativo/blob/main/index.html) — Interface modular do front-end e renderização cartográfica
+  *  [README.md](https://github.com/SheTechies/MapeamentoColaborativo/blob/main/README.md) — Documentação técnica do projeto (Este arquivo)
 
 ---
 
 ## Instruções de instalação e Uso
 
 ### Pré-requisitos
-Para executar e testar o protótipo funcional, você necessita apenas de:
+Para executar e testar o protótipo funcional e a modelagem de banco de dados, você necessita de:
 1. Um computador ou smartphone com acesso à internet.
-2. Um navegador web moderno atualizado (Google Chrome, Mozilla Firefox, Microsoft Edge ou Safari).
-3. Permissão de GPS ativa no navegador para capturar as coordenadas reais do hardware durante as postagens (caso negado, o sistema aplica automaticamente coordenadas da região central de Campo Grande-MS).
+2. Um gerenciador de banco de dados relacional ou simulador (como o DB Fiddle) para executar o script contido na pasta [**/sql**](https://github.com/SheTechies/MapeamentoColaborativo/tree/main/sql).
+3. Permissão de GPS ativa no navegador para capturar as coordenadas reais do hardware durante as postagens.
 
 ### Como rodar localmente
 1. **Clonar o repositório:**
